@@ -1,0 +1,50 @@
+常用函数
+2016年2月5日
+11:13
+1.	sub_name=strrep(duration_Files(i,1).name,'-duration','-difference');
+解释：字符串替换函数，将name中的‘-duration’替换成‘-difference’
+ 
+2.	duration_Files(i,1).name=lower(duration_Files(i,1).name);   
+解释：lower字符串小写函数，upper字符串大写函数
+ 
+3.	[~,index] = sortrows({duration_Files.name}.'); duration_Files = duration_Files(index); clear index;
+解释：sortrows字符串排序函数
+ 
+4.	data(data(:,2)>=1,2)=5;  data(data(:,2)<1,2)=0
+解释：对data第二列数据进行判断，当数据的值大于1时，将第二列对应的数值修改为5；当数据的值小于1时，将第二列对应的数值修改为0。
+5.	 duration=repmat(duration,59,1);
+解释：行数变为59份，列数不变
+6.	size函数：获取矩阵的行数和列数 
+•	s=size(A),
+当只有一个输出参数时，返回一个行向量，该行向量的第一个元素时矩阵的行数，第二个元素是矩阵的列数。
+•	[r, c]=size(A),
+当有两个输出参数时，size函数将矩阵的行数返回到第一个输出变量r，将矩阵的列数返回到第二个输出变量c。
+•	size(A, n)如果在size函数的输入参数中再添加一项n，并用1或2为n赋值，则 size将返回矩阵的行数或列数。其中r=size(A,1)该语句返回的时矩阵A的行数， c=size(A,2) 该语句返回的时矩阵A的列数
+ 
+•	Matlab取整函数有: fix, floor, ceil, round.
+•	fix：朝零方向取整，如fix(-1.3)=-1; fix(1.3)=1;
+•	floor：朝负无穷方向取整，如floor(-1.3)=-2; floor(1.3)=1;
+•	ceil：朝正无穷方向取整，如ceil(-1.3)=-1; ceil(1.3)=2;
+•	round：四舍五入到最近的整数，如round(-1.3)=-1;round(-1.52)=-2;round(1.3)=1;round(1.52)=2。
+ 
+•	butter函数
+•	说白了，设计滤波器就是设计滤波器系数[B,A]。
+[B,A] = BUTTER(N,Wn,'high') ---用来设计高通滤波器
+[B,A] = BUTTER(N,Wn,'low') ---用来设计低通滤波器
+[B,A] = BUTTER(N,Wn)--用来设计带通滤波器
+•	N是滤波器的阶数（也就是执行几次滤波），不熟的话，大概取个整数就可以了。Wn的确定跟你的采样频率Fs有关。
+•	对于原始信号x。
+比如说你的采样频率Fs=1000Hz，设计一个8阶、通带为100-200Hz的带通滤波器：
+[b,a]=butter(8,[0.2 0.4])=butter(8,[100/(1000/2) 200/(1000/2) ])
+这里Fa=Fs/2，Fa是分析频率
+ 
+•	data=awgn(sig1+sig2,SNR);  % add white noise to signal according to a specific SNR
+解释：加性高斯白噪声AWGN(Additive White Gaussian Noise)
+ 
+10.	eeglab读取ICA或者ICA_Cleaned文件方法
+ALLEEG=movieEEG; 将ICA或者ICA_Cleaned文件的数据赋值给给EEGLAB认识的变量ALLEEG。
+eeglab radraw; 打开eeglab GUI，读取ICA或者ICA_Cleaned文件。
+ 
+   
+11.	 [c, ia, ib] = intersect(conf.eeg_all_in_one_chan, Chan);
+  查找当前文件中与Chan对应的电极序号，保存在ia变量下
